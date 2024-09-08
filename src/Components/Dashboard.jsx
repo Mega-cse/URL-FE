@@ -32,7 +32,7 @@ const Dashboard = () => {
     return (
         <div className="dashboard-container">
             <h1 className="dashboard-header">
-                Welcome, {user?.username || 'User'}
+                Welcome, {user?.username ? user.username : 'User'}
             </h1>
             <p className="dashboard-welcome">Experience your personalized dashboard</p>
             <div className="navigation-container">
