@@ -14,12 +14,14 @@ const Dashboard = () => {
     }, [navigate]);
 
     // Retrieve user data from local storage
-    let user;
+    let user = {};
     try {
-        user = JSON.parse(localStorage.getItem('user')) || {};
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            user = JSON.parse(storedUser);
+        }
     } catch (e) {
         console.error('Failed to parse user data from localStorage:', e);
-        user = {};
     }
 
     // Function to handle logout
@@ -32,7 +34,7 @@ const Dashboard = () => {
     return (
         <div className="dashboard-container">
             <h1 className="dashboard-header">
-                Welcome, {user?.username ? user.username : 'User'}
+                Welcome, {user.username ? user.username : 'User'}
             </h1>
             <p className="dashboard-welcome">Experience your personalized dashboard</p>
             <div className="navigation-container">
