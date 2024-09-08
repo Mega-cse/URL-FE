@@ -1,26 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         // Check if the user is authenticated
-        const isAuthenticated = !!localStorage.getItem('token');
-        if (!isAuthenticated) {
+        const token = localStorage.getItem('token');
+        if (!token) {
             navigate('/');
+            return;
+        }
+
+        // Retrieve user data from local storage
+        try {
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            setUser(storedUser);
+        } catch (e) {
+            console.error('Failed to parse user data from localStorage:', e);
+            setUser({});
         }
     }, [navigate]);
-
-    // Retrieve user data from local storage
-    let user;
-    try {
-        user = JSON.parse(localStorage.getItem('user')) || {};
-    } catch (e) {
-        console.error('Failed to parse user data from localStorage:', e);
-        user = {};
-    }
 
     // Function to handle logout
     const handleLogout = () => {
@@ -32,7 +34,7 @@ const Dashboard = () => {
     return (
         <div className="dashboard-container">
             <h1 className="dashboard-header">
-                Welcome, {user?.username ? user.username : 'User'}
+                Welcome, {user?.username || 'User'}
             </h1>
             <p className="dashboard-welcome">Experience your personalized dashboard</p>
             <div className="navigation-container">
