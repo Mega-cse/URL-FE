@@ -14,7 +14,7 @@ const URLShortener = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5001/api/shorten', { longUrl });
+            const response = await axios.post('https://url-backend-mod0.onrender.com/api/shorten', { longUrl });
             setShortUrl(response.data.shortUrl);
         } catch (error) {
             setError('Error shortening URL. Please try again.');
