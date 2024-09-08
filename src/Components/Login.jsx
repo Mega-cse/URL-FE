@@ -12,6 +12,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
+            // Send login request to the backend
             const response = await axios.post('https://url-backend-mod0.onrender.com/api/user/login', {
                 email,
                 password,
@@ -19,11 +20,16 @@ const Login = () => {
 
             if (response.status === 200) {
                 const { token, user } = response.data;
+
+                // Store token and user data in localStorage
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
+
+                // Redirect to the dashboard
                 navigate('/dashboard');
             }
         } catch (error) {
+            // Handle errors
             setLoginError(error.response?.data?.message || 'An error occurred');
         }
     };
