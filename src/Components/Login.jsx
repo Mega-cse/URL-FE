@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://url-backend-mod0.onrender.com/api/login', {
+            const response = await axios.post('https://url-backend-mod0.onrender.com/api/user/login', {
                 email,
                 password,
             });
