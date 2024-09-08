@@ -12,8 +12,8 @@ const URLShortener = () => {
 
     useEffect(() => {
         // Check if the user is authenticated
-        const isAuthenticated = !!localStorage.getItem('token');
-        if (!isAuthenticated) {
+        const token = localStorage.getItem('token');
+        if (!token) {
             navigate('/login');
         }
     }, [navigate]);
@@ -25,7 +25,6 @@ const URLShortener = () => {
         setLoading(true);
 
         try {
-<<<<<<< HEAD
             // Send POST request to shorten URL
             const response = await axios.post('https://url-backend-mod0.onrender.com/api/shorten', { longUrl });
             const newShortUrl = response.data.shortUrl;
@@ -39,10 +38,6 @@ const URLShortener = () => {
 
             // Store updated URL data in local storage
             localStorage.setItem('urls', JSON.stringify(urlData));
-=======
-            const response = await axios.post('https://url-backend-mod0.onrender.com/api/shorten', { longUrl });
-            setShortUrl(response.data.shortUrl);
->>>>>>> 6d69e1bd12dde98fa1819971f4c756aa8f9d5106
         } catch (error) {
             setError('Error shortening URL. Please try again.');
             console.error('Error shortening URL:', error);
