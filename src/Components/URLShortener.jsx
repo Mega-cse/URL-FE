@@ -14,7 +14,7 @@ const URLShortener = () => {
         // Check if the user is authenticated
         const isAuthenticated = !!localStorage.getItem('token');
         if (!isAuthenticated) {
-            navigate('/');
+            navigate('/login');
         }
     }, [navigate]);
 
