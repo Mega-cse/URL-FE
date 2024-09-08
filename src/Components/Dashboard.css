@@ -1,0 +1,63 @@
+/* Container for the entire dashboard */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f9;
+    min-height: 100vh;
+}
+
+/* Heading styles */
+.dashboard-header {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Welcome message styles */
+.dashboard-welcome {
+    font-size: 1.5em;
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Button styles */
+.dashboard-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.dashboard-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+/* Logout container styles */
+.logout-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.logout-container button {
+    background-color: #dc3545;
+    font-size: 1.1em;
+}
+
+.logout-container button:hover {
+    background-color: #c82333;
+}

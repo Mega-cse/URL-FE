@@ -1,0 +1,71 @@
+/* Home.css */
+
+/* Header with fixed navbar */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    z-index: 1000; /* Ensure it is above other content */
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #333;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Padding to offset the fixed navbar */
+.home-container {
+    padding-top: 60px; /* Adjust based on navbar height */
+    text-align: center;
+}
+
+.home-message {
+    margin-top: 50px;
+}
+
+.home-message h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+.home-message p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar li {
+        margin: 10px 0;
+    }
+}
