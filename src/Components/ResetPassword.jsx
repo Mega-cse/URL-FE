@@ -11,7 +11,7 @@ const ResetPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`https://passwordresetflow-be.onrender.com/api/reset-password/${token}`, {
+            const response = await fetch(`https://url-backend-mod0.onrender.com/api/user/reset-password/${token}`, {
                 method: 'PUT', // Ensure method matches backend expectations
                 headers: {
                     'Content-Type': 'application/json',

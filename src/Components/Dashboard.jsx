@@ -14,7 +14,13 @@ const Dashboard = () => {
     }, [navigate]);
 
     // Retrieve user data from local storage
-    const user = JSON.parse(localStorage.getItem('user'));
+    let user;
+    try {
+        user = JSON.parse(localStorage.getItem('user')) || {};
+    } catch (e) {
+        console.error('Failed to parse user data from localStorage:', e);
+        user = {};
+    }
 
     // Function to handle logout
     const handleLogout = () => {

@@ -8,7 +8,7 @@ const ForgotPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://passwordresetflow-be.onrender.com/api/forget-password', { email });
+            const response = await axios.post('https://url-backend-mod0.onrender.com/api/user/forget-password', { email });
             setMessage(response.data.message);
         } catch (error) {
             setMessage(error.response?.data?.message || 'An error occurred');

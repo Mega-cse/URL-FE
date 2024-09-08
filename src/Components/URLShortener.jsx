@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const URLShortener = () => {
     const [longUrl, setLongUrl] = useState('');
+    const [description, setDescription] = useState('');
     const [shortUrl, setShortUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Check if the user is authenticated
+        const isAuthenticated = !!localStorage.getItem('token');
+        if (!isAuthenticated) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,8 +25,19 @@ const URLShortener = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5001/api/shorten', { longUrl });
-            setShortUrl(response.data.shortUrl);
+            // Send POST request to shorten URL
+            const response = await axios.post('https://url-backend-mod0.onrender.com/api/shorten', { longUrl });
+            const newShortUrl = response.data.shortUrl;
+            setShortUrl(newShortUrl);
+
+            // Retrieve existing URLs from local storage
+            const urlData = JSON.parse(localStorage.getItem('urls')) || [];
+
+            // Add new URL data
+            urlData.push({ longUrl, shortUrl: newShortUrl, description });
+
+            // Store updated URL data in local storage
+            localStorage.setItem('urls', JSON.stringify(urlData));
         } catch (error) {
             setError('Error shortening URL. Please try again.');
             console.error('Error shortening URL:', error);
@@ -35,6 +57,12 @@ const URLShortener = () => {
                     placeholder="Enter long URL"
                     required
                 />
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Enter description"
+                />
                 <button type="submit" disabled={loading}>
                     {loading ? 'Shortening...' : 'Shorten'}
                 </button>
@@ -44,6 +72,7 @@ const URLShortener = () => {
                 <div className="card">
                     <h2>Shortened URL:</h2>
                     <p><strong>Original URL:</strong> {longUrl}</p>
+                    <p><strong>Description:</strong> {description}</p>
                     <p><strong>Shortened URL:</strong> <a href={shortUrl} target="_blank" rel="noopener noreferrer">{shortUrl}</a></p>
                 </div>
             )}
